@@ -1,9 +1,14 @@
 import java.util.Scanner;
+import java.util.stream.Stream;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Main
 {
 	int wybor;
+	static String fileName = "uzytkownicy.txt";
+	static long noOfLines = 0;
 	public int menu()
 	{	
 		Main myObj = new Main();
@@ -51,9 +56,23 @@ public class Main
 		d = getString();
 		System.out.println("Podaj nazwisko: ");
 		e = getString();
-		return user("["+a+", "+b+", "+c,", "+d+", "+e+"]+");
+		return user(String.valueOf(noOfLines) + " ["+a+", "+b+", "+c,", "+d+", "+e+"]");
 	}
 	
+	static void write_out()
+	{
+		File myObj = new File("uzytkownicy.txt");
+		Scanner myReader = new Scanner(myObj);
+		try {
+			while (myReader.hasNextLine()) {
+			  String data = myReader.nextLine();
+			  System.out.println(data);
+			}
+		}finally{
+			myReader.close();
+		}
+	}
+
 	public static void main(String[] args) throws FileNotFoundException, IOException
     {
 		Main instance = new Main();
@@ -64,12 +83,15 @@ public class Main
 				if(!create.exists()) {
 					create.createNewFile();
 				}
-				PrintWriter write = new PrintWriter("uzytkownicy.txt");
+				try (Stream<String> fileStream = Files.lines(Paths.get(fileName))) {
+  					noOfLines = (int) fileStream.count();
+				}
+				PrintWriter write = new PrintWriter(new FileWriter("uzytkownicy.txt", true));
 				write.println(rejestracja());
 				write.close();
 				break;
 			case 2:
-
+				write_out();
 				break;
 			case 3:
 
