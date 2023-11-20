@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.io.*;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 class FileCopy {
 
@@ -81,7 +83,7 @@ class Entry {
 			System.out.println("Błąd, spróbuj ponownie");
 			number = Main.getInt();
 		}
-
+		int numerLinii = number + 1;
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			int currentLine = 1;
             while ((line2 = br.readLine()) != null) {
@@ -95,16 +97,42 @@ class Entry {
             e.printStackTrace();
         }
 
-		File create = new File("wyjazd.txt");
+		File create = new File("wjazd2.txt");
 		if(!create.exists()) {
 			create.createNewFile();
 		}
-		PrintWriter write = new PrintWriter(new FileWriter("wyjazd.txt", true));
-		write.println(line3);
-		write.close();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("wjazd.txt"));
+            PrintWriter writer = new PrintWriter(new FileWriter("wjazd2.txt"));
+            String line;
+            int currentLine = 1;
+
+            while ((line = reader.readLine()) != null) {
+                if (currentLine == numerLinii) {
+                    writer.println(line);
+                }
+                currentLine++;
+            }
+
+            reader.close();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 	}
 	
+}
+
+class Exit {
+
+	public static void exitcar() throws IOException {
+
+
+
+	}
+
 }
 
 public class Main {
@@ -148,7 +176,7 @@ public class Main {
                     break;
 
                 case 4:
-
+					Exit.exitcar();
                     break;
 
                 case 5:
