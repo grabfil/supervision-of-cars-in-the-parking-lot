@@ -1,24 +1,25 @@
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.File;
+import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
 
 public class Exit {
     
     static String line2, line3;
 	static int number;
-    
-
+	static ArrayList<String> exit_logs = new ArrayList<String>();
 
 	public static void exitcar() throws IOException {
+
+        DateTime dateTime = new DateTime();
+
         Path path2 = Paths.get("wyjazd.txt");
         long fileSize = Files.size(path2);
         if (fileSize == 0) {
@@ -69,7 +70,7 @@ public class Exit {
 		String sourceFilePath = "wyjazd.txt";
         String destinationFilePath = "wjazd.txt"; 
         int lineToRemove = numerLinii; 
-
+        String dateAndTime = "dnia " + dateTime.formatted_date() + " o godzinie " + dateTime.formatted_time() + " wyjechał ";
         try {
             BufferedReader reader = new BufferedReader(new FileReader(sourceFilePath));
             PrintWriter writer = new PrintWriter(new FileWriter(destinationFilePath, true));
@@ -79,6 +80,7 @@ public class Exit {
             while ((line = reader.readLine()) != null) {
                 if (currentLine == lineToRemove) {
                     writer.println(line);
+                    exit_logs.add(dateAndTime + line);
                 }
                 currentLine++;
             }

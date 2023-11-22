@@ -12,11 +12,12 @@ public class Main {
 	static long noOfLines = 0;
 	static int wybor = 0;
     static int count = 0;
-	static ArrayList<String> nazwisko = new ArrayList<String>();
-	static ArrayList<String> tablica = new ArrayList<String>();
 	static ArrayList<String> marka = new ArrayList<String>();
 	static ArrayList<String> model = new ArrayList<String>();
+	static ArrayList<String> tablica = new ArrayList<String>();
 	static ArrayList<String> imie = new ArrayList<String>();
+	static ArrayList<String> nazwisko = new ArrayList<String>();
+	static int list = 0;
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         while (true) {
@@ -75,14 +76,13 @@ public class Main {
             System.out.println("|DOZÓR SAMOCHODÓW NA PARKINGU|");
             System.out.println("------------------------------");
         }
-
-		System.out.println("Wybierz:");
 		System.out.println("1. Wprowadź nowego użytkownika");
 		System.out.println("2. Wypisz wszystkich użytkowników korzystających z parkingu");
 		System.out.println("3 - Wjazd samochodu na parking");
 		System.out.println("4 - Wyjazd samochodu z parkingu");
 		System.out.println("5 - Logi parkowania");
 		System.out.println("6 - Zakończ program");
+		System.out.print("Wybierz: ");
 
 		wybor = getInt();
 
@@ -121,7 +121,9 @@ public class Main {
 		System.out.println("Podaj nazwisko: ");
 		nazwisko.add(getString());
 
-		return Car.user(/*String.valueOf(noOfLines) + */"[Samochód: "+marka.get(marka.size()-1)+" "+model.get(model.size()-1)+", Tablica rejestracyjna: "+tablica.get(tablica.size()-1),", Imię: "+imie.get(imie.size()-1)+", Nazwisko: "+nazwisko.get(nazwisko.size()-1)+"]");
+		list++;
+
+		return Car.user("[Samochód: "+marka.get(marka.size()-1)+" "+model.get(model.size()-1)+", Tablica rejestracyjna: "+tablica.get(tablica.size()-1),", Imię: "+imie.get(imie.size()-1)+", Nazwisko: "+nazwisko.get(nazwisko.size()-1)+"]");
 
 	}
 	

@@ -1,23 +1,25 @@
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.File;
+import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
 
 public class Entry {
 
     static String line2, line3;
 	static int number;
+	static ArrayList<String> entry_logs = new ArrayList<String>();
 
 	public static void entrycar() throws IOException {
 
+        DateTime dateTime = new DateTime();
+        
         File create1 = new File("wjazd.txt");
 		if(!create1.exists()) {
 			create1.createNewFile();
@@ -44,19 +46,7 @@ public class Entry {
 			System.out.println("Błąd, spróbuj ponownie");
 			number = Main.getInt();
 		}
-		int numerLinii = number;/* 
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-			int currentLine = 1;
-            while ((line2 = br.readLine()) != null) {
-                if (currentLine == number+1) {
-                    line3 = line2;
-                    break;
-                }
-                currentLine++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+		int numerLinii = number;
 
 		File create = new File("wyjazd.txt");
 		if(!create.exists()) {
@@ -66,7 +56,7 @@ public class Entry {
 		String sourceFilePath = "wjazd.txt"; 
         String destinationFilePath = "wyjazd.txt"; 
         int lineToRemove = numerLinii; 
-
+        String dateAndTime = "dnia " + dateTime.formatted_date() + " o godzinie " + dateTime.formatted_time() + " wjechał ";
         try {
             BufferedReader reader = new BufferedReader(new FileReader(sourceFilePath));
             PrintWriter writer = new PrintWriter(new FileWriter(destinationFilePath, true));
@@ -76,6 +66,7 @@ public class Entry {
             while ((line = reader.readLine()) != null) {
                 if (currentLine == lineToRemove) {
                     writer.println(line); 
+                    entry_logs.add(dateAndTime + line);
                 }
                 currentLine++;
             }
