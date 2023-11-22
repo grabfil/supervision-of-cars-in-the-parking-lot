@@ -1,139 +1,9 @@
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.Path;
 import java.io.*;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
-class FileCopy {
-
-    public static void copy() {
-
-        String sourceFilePath = "uzytkownicy.txt"; 
-        String destinationFilePath = "wjazd.txt";
-        Path sourcePath = Paths.get(sourceFilePath);
-        Path destinationPath = Paths.get(destinationFilePath);
-        long lastModifiedTime = 0;
-
-        try {
-            while (true) {
-                BasicFileAttributes attr = Files.readAttributes(sourcePath, BasicFileAttributes.class);
-                long newModifiedTime = attr.lastModifiedTime().to(TimeUnit.MILLISECONDS);
-
-                if (newModifiedTime > lastModifiedTime) {
-                    lastModifiedTime = newModifiedTime;
-                    Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
-					break;
-                }
-                TimeUnit.SECONDS.sleep(1);
-            }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-}
-
-class Car {
-
-	static String car(String brand, String model, String plate) {
-		return brand + " " + model + " " + plate; 
-	}
-
-	static String owner(String fname, String lname) {
-		return fname + " " + lname; 
-	}
-
-	static String user(String car, String owner) {
-		return car + owner;
-	}
-
-}
-
-class Entry {
-
-	static String line2, line3;
-	static int number;
-
-	public static void entrycar() throws IOException {
-
-		String filePath = "wjazd.txt";
-		int lineCount = 0;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-				lineCount++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-		System.out.println(lineCount+" Którym autem chcesz wjechać na parking? (Podaj numer)");
-	 	number = Main.getInt();
-		while (number < 0 || number > lineCount-1) {
-			System.out.println("Błąd, spróbuj ponownie");
-			number = Main.getInt();
-		}
-		int numerLinii = number + 1;
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-			int currentLine = 1;
-            while ((line2 = br.readLine()) != null) {
-                if (currentLine == number+1) {
-                    line3 = line2;
-                    break;
-                }
-                currentLine++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-		File create = new File("wjazd2.txt");
-		if(!create.exists()) {
-			create.createNewFile();
-		}
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("wjazd.txt"));
-            PrintWriter writer = new PrintWriter(new FileWriter("wjazd2.txt"));
-            String line;
-            int currentLine = 1;
-
-            while ((line = reader.readLine()) != null) {
-                if (currentLine == numerLinii) {
-                    writer.println(line);
-                }
-                currentLine++;
-            }
-
-            reader.close();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-	}
-	
-}
-
-class Exit {
-
-	public static void exitcar() throws IOException {
-
-
-
-	}
-
-}
 
 public class Main {
 
@@ -162,12 +32,12 @@ public class Main {
                         noOfLines = (int) fileStream.count();
                     }
                     PrintWriter write = new PrintWriter(new FileWriter("uzytkownicy.txt", true));
-                    write.println(rejestracja());
+                    write.println(Main.rejestracja());
                     write.close();
                     FileCopy.copy();
                     break;
 
-                case 2:
+				case 2:
                     write_out();
                     break;
 
@@ -180,7 +50,7 @@ public class Main {
                     break;
 
                 case 5:
-
+					Logs.parking();
                     break;
 
                 case 6:
@@ -251,7 +121,7 @@ public class Main {
 		System.out.println("Podaj nazwisko: ");
 		nazwisko.add(getString());
 
-		return Car.user(String.valueOf(noOfLines) + "[Samochód: "+marka.get(marka.size()-1)+" "+model.get(model.size()-1)+", Tablica rejestracyjna: "+tablica.get(tablica.size()-1),", Imię: "+imie.get(imie.size()-1)+", Nazwisko: "+nazwisko.get(nazwisko.size()-1)+"]");
+		return Car.user(/*String.valueOf(noOfLines) + */"[Samochód: "+marka.get(marka.size()-1)+" "+model.get(model.size()-1)+", Tablica rejestracyjna: "+tablica.get(tablica.size()-1),", Imię: "+imie.get(imie.size()-1)+", Nazwisko: "+nazwisko.get(nazwisko.size()-1)+"]");
 
 	}
 	

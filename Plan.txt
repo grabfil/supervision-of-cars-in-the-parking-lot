@@ -14,7 +14,7 @@ Ponadto system daje możliwość zobaczenia kiedy dany pojazd wjeżdża oraz wyj
 * Zapisywanie użytkowników w pliku tekstowym
 * Pobieranie użytkowników z pliku tekstowego
 * Menu:
-- Dodawanie nowego użytkownika (marka samochodu, model samochodu, rejestracja
+- Dodawanie nowego użytkownika marka samochodu, model samochodu, rejestracja
    |DOZÓR SAMOCHODÓW NA PARKINGU|
    ------------------------------
       Wybierz: 
