@@ -24,7 +24,7 @@ public class Main {
             int wybor = menu();
 		    switch(wybor) {
 
-                case 1:
+                case 1: //tworzenie nowego uzytkownika
                     File create = new File("uzytkownicy.txt");
                     if(!create.exists()) {
                         create.createNewFile();
@@ -38,24 +38,24 @@ public class Main {
                     FileCopy.copy();
                     break;
 
-				case 2:
-                    write_out();
+					case 2: //wypisywanie uzytkowników
+                    write_out(); 
                     break;
 
-                case 3:
-                    Entry.entrycar();
+                case 3: //wjazd samochodu na parking
+                    Entry.entrycar(); 
                     break;
 
-                case 4:
-					Exit.exitcar();
+                case 4: //wyjazd samochodu z parkingu
+					Exit.exitcar(); 
                     break;
 
-                case 5:
-					Logs.parking();
+                case 5: //logi parkowania
+					Logs.parking(); 
                     break;
 
-                case 6:
-                    System.exit(0);
+                case 6: //zamknięcie programu
+                    System.exit(0); 
                     break;
                 
                 default:

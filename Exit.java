@@ -33,7 +33,7 @@ public class Exit {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(c+". "+line);
+                System.out.println(c+". "+line); //wypisywanie aut z pliku wyjazd.txt
 				lineCount++;
                 c++;
             }
